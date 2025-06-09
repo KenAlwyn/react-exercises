@@ -1,33 +1,22 @@
 import React, { useState, useEffect } from "react";
 
+const emptyFormData = {
+  firstName: "",
+  lastName: "",
+  middleName: "",
+  suffix: "",
+  age: "",
+  birthdate: "",
+  address: "",
+};
+
 function UserForm({ onSubmit, initialData = null, mode = "add" }) {
-  const [formData, setFormData] = useState(
-    initialData || {
-      firstName: "",
-      lastName: "",
-      middleName: "",
-      suffix: "",
-      age: "",
-      birthdate: "",
-      address: "",
-    }
-  );
+  const [formData, setFormData] = useState(initialData || emptyFormData);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    setFormData(
-      initialData || {
-        firstName: "",
-        lastName: "",
-        middleName: "",
-        suffix: "",
-        age: "",
-        birthdate: "",
-        address: "",
-      }
-    );
+    setFormData(initialData || emptyFormData);
   }, [initialData]);
-
-  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,13 +28,45 @@ function UserForm({ onSubmit, initialData = null, mode = "add" }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const nameFields = ["firstName", "middleName", "lastName", "suffix"];
+    const nameRegex = /^[A-Za-z. ]+$/;
+
+    for (let field of nameFields) {
+      const value = formData[field].trim();
+      if (!nameRegex.test(value)) {
+        setError(
+          `Invalid ${
+            field.charAt(0).toUpperCase() +
+            field.slice(1).replace(/([A-Z])/g, " $1")
+          }, only letters allowed`
+        );
+        return;
+      }
+    }
+
+    const addressRegex = /^[A-Za-z0-9. ]+$/;
+    if(!addressRegex.test(formData["address"].trim())) {
+      setError("Invalid Address, only letters and numbers allowed");
+      return;
+    }
+
     if (parseInt(formData.age) <= 0) {
       setError("Enter a valid age");
       return;
     }
+
     setError("");
-    onSubmit(formData);
+    onSubmit({
+      ...formData,
+      firstName: formData.firstName.trim(),
+      middleName: formData.middleName.trim(),
+      lastName: formData.lastName.trim(),
+      suffix: formData.suffix.trim(),
+      address: formData.address.trim(),
+    });
     document.getElementById("form_edit_modal").close();
+    setFormData(emptyFormData);
   };
 
   return (

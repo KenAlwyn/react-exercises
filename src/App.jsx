@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import UserForm from "./components/UserForm";
 import Table from "./components/Table";
+import DeleteModal from "./components/DeleteModal";
 
 const sampleTabData = [];
 
@@ -25,6 +26,10 @@ function App() {
     setUsers(updatedUsers);
   };
 
+  const handleDeleteAll = () => {
+    setUsers([]);
+  };
+
   const openAddModal = () => {
     setFormMode("add");
     setSelectedUserIndex(null);
@@ -37,18 +42,29 @@ function App() {
     document.getElementById("form_edit_modal").showModal();
   };
 
+  const openDeleteModal = (index) => {
+    setSelectedUserIndex(index)
+    document.getElementById("form_delete_modal").showModal();
+  };
+
   return (
     <div className="App">
-      <div className="flex justify-start ml-3">
+      <div className="flex justify-start ml-3 gap-3">
         <button
           className="btn bg-green-600 text-white hover:bg-green-700"
           onClick={openAddModal}
         >
           Add User
         </button>
+        <button
+          className="btn bg-red-600 text-white hover:bg-red-700"
+          onClick={handleDeleteAll}
+        >
+          Delete All
+        </button>
       </div>
 
-      <Table tabData={users} onEdit={openEditModal} onDelete={handleDelete} />
+      <Table tabData={users} onEdit={openEditModal} onDelete={openDeleteModal} />
 
       <dialog id="form_edit_modal" className="modal">
         <UserForm
@@ -57,6 +73,10 @@ function App() {
           initialData={formMode === "edit" ? users[selectedUserIndex] : null}
           mode={formMode}
         />
+      </dialog>
+
+      <dialog id="form_delete_modal" className="modal">
+        <DeleteModal userId={selectedUserIndex} onDelete={handleDelete} />
       </dialog>
     </div>
   );

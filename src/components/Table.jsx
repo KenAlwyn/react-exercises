@@ -21,8 +21,8 @@ const Table = ({ tabData, onEdit, onDelete }) => {
           <tbody>
             {tabData.length === 0 ? (
               <tr>
-                <td colSpan="8" className="px-4 py-4 text-center text-gray-500">
-                  No data available.
+                <td colSpan="9" className="px-4 py-4 text-center text-gray-500">
+                  No data available
                 </td>
               </tr>
             ) : (
@@ -39,7 +39,7 @@ const Table = ({ tabData, onEdit, onDelete }) => {
                   <td className="px-4 py-2">{userInfo.age}</td>
                   <td className="px-4 py-2">{userInfo.birthdate}</td>
                   <td className="px-4 py-2">{userInfo.address}</td>
-                  <td className="px-4 py-2">
+                  <td className="py-2">
                     <div className="flex justify-center items-center gap-2">
                       <button
                         onClick={() => onEdit(idx)}
