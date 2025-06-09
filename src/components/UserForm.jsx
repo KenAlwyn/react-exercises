@@ -34,6 +34,7 @@ function UserForm({ onSubmit, initialData = null, mode = "add" }) {
 
     for (let field of nameFields) {
       const value = formData[field].trim();
+      if(value == "") continue;
       if (!nameRegex.test(value)) {
         setError(
           `Invalid ${
