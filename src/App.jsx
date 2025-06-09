@@ -10,6 +10,7 @@ function App() {
   const [selectedUserIndex, setSelectedUserIndex] = useState(null);
   const [formMode, setFormMode] = useState("add");
 
+  // operations
   const handleAdd = (newUser) => {
     setUsers([...users, newUser]);
   };
@@ -30,6 +31,7 @@ function App() {
     setUsers([]);
   };
 
+  // modals
   const openAddModal = () => {
     setFormMode("add");
     setSelectedUserIndex(null);
