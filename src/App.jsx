@@ -1,49 +1,65 @@
 import React, { useState } from "react";
-import "./App.css";
+import UserForm from "./components/UserForm";
+import Table from "./components/Table";
 
+const sampleTabData = [];
 
 function App() {
-  const [task, setTask] = useState("");
-  const [tasks, setTasks] = useState([]);
+  const [users, setUsers] = useState([...sampleTabData]);
+  const [selectedUserIndex, setSelectedUserIndex] = useState(null);
+  const [formMode, setFormMode] = useState("add");
 
-  const handleAdd = () => {
-    if (task.trim() === "") return;
-    setTasks([...tasks, task]);
-    setTask("");
+  const handleAdd = (newUser) => {
+    setUsers([...users, newUser]);
   };
 
-  const handleDelete = (index) => {
-    const newTasks = tasks.filter((_, i) => i !== index);
-    setTasks(newTasks);
+  const handleEdit = (updatedUser) => {
+    const updatedUsers = [...users];
+    updatedUsers[selectedUserIndex] = updatedUser;
+    setUsers(updatedUsers);
+    setSelectedUserIndex(null);
   };
 
-  const handleDeleteAll = () => {
-    setTasks([]);
-  }
+  const handleDelete = (indexToRemove) => {
+    const updatedUsers = users.filter((_, idx) => idx !== indexToRemove);
+    setUsers(updatedUsers);
+  };
+
+  const openAddModal = () => {
+    setFormMode("add");
+    setSelectedUserIndex(null);
+    document.getElementById("form_edit_modal").showModal();
+  };
+
+  const openEditModal = (index) => {
+    setFormMode("edit");
+    setSelectedUserIndex(index);
+    document.getElementById("form_edit_modal").showModal();
+  };
 
   return (
     <div className="App">
-      <h1>To-Do App</h1>
-      <input
-        type="text"
-        placeholder="Enter a task"
-        value={task}
-        onChange={(e) => setTask(e.target.value)}
-      />
+      <div className="flex justify-start ml-3">
+        <button
+          className="btn bg-green-600 text-white hover:bg-green-700"
+          onClick={openAddModal}
+        >
+          Add User
+        </button>
+      </div>
 
-      <button onClick={handleAdd}>Add Task</button>
-      <button id="del-button" onClick={handleDeleteAll}>Delete All</button>
-      
-      <ul>
-        {tasks.map((t, i) => (
-          <li key={i}>
-            {t} <button onClick={() => handleDelete(i)}>Delete</button>
-          </li>
-        ))}
-      </ul>
+      <Table tabData={users} onEdit={openEditModal} onDelete={handleDelete} />
 
-      
+      <dialog id="form_edit_modal" className="modal">
+        <UserForm
+          key={formMode === "edit" ? selectedUserIndex : "add"}
+          onSubmit={formMode === "edit" ? handleEdit : handleAdd}
+          initialData={formMode === "edit" ? users[selectedUserIndex] : null}
+          mode={formMode}
+        />
+      </dialog>
     </div>
   );
 }
+
 export default App;
