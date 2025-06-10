@@ -67,7 +67,7 @@ const UserManagementPage = () => {
     <div className="App">
       <div className="flex justify-start ml-3 gap-3">
         <button
-          className="btn bg-green-600 text-white hover:bg-green-700"
+          className="btn bg-blue-600 text-white hover:bg-blue-700"
           onClick={openAddModal}
         >
           Add User

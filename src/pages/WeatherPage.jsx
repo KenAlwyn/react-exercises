@@ -48,7 +48,7 @@ const WeatherPage = () => {
         />
         <button
           onClick={getData}
-          className="btn bg-green-600 hover:bg-green-700 text-white"
+          className="btn bg-blue-600 hover:bg-blue-700 text-white"
         >
           Search
         </button>
