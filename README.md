@@ -1,12 +1,38 @@
-# React + Vite
+# React Exercises
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This web application contains three exercises demonstrating different React capabilities.
 
-Currently, two official plugins are available:
+## Exercises
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 1. User Management
 
-## Expanding the ESLint configuration
+**Functions:**
+- Add, edit, and delete users
+- Form validations
+- Local storage management
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+**Takeaways:**
+- The main challenge was implementing form validations
+- Learned the importance of cleaning user inputs for both presentation and security
+- Other components (modals, tables) were simpler due to prior experience
+
+### 2. Weather Checker
+
+**Functions:**
+- Fetch weather data from specific cities
+
+**Takeaways:**
+- Discovered that invalid city inputs still return weather data (API behavior)
+- Gained experience working with external APIs and handling responses
+
+### 3. Fake Store
+
+**Functions:**
+- Fetch and display all products
+- Product card components
+- Detailed product view (modal)
+
+**Takeaways:**
+- The most challenging aspect was styling and UI design
+- Functionality was straightforward despite creative challenges
+- Improved component composition skills
