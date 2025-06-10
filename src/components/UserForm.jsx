@@ -29,6 +29,7 @@ function UserForm({ onSubmit, initialData = null, mode = "add" }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // name field validation
     const nameFields = ["firstName", "middleName", "lastName", "suffix"];
     const nameRegex = /^[A-Za-z. ]+$/;
 
@@ -46,12 +47,14 @@ function UserForm({ onSubmit, initialData = null, mode = "add" }) {
       }
     }
 
+    // address validation
     const addressRegex = /^[A-Za-z0-9. ]+$/;
     if(!addressRegex.test(formData["address"].trim())) {
       setError("Invalid Address, only letters and numbers allowed");
       return;
     }
 
+    // age validation
     if (parseInt(formData.age) <= 0) {
       setError("Enter a valid age");
       return;

@@ -4,6 +4,8 @@ import { NavLink } from "react-router-dom";
 const Navbar = () => {
   return (
     <div className="navbar  text-neutral-content px-8 py-4">
+
+      {/* Logo */}
       <div className="flex-1">
         <div className="flex items-center space-x-3">
           <div className="bg-white/20 p-2 rounded-xl backdrop-blur-sm">
@@ -15,8 +17,10 @@ const Navbar = () => {
         </div>
       </div>
       
+      {/* Menu Items */}
       <div className="flex-none">
         <ul className="menu menu-horizontal space-x-1 px-1">
+          {/* User Mgt Page */}
           <li>
             <NavLink 
               to="/user-mgt"
@@ -29,6 +33,7 @@ const Navbar = () => {
               User Management
             </NavLink>
           </li>
+          {/* Weather Page */}
           <li>
             <NavLink 
               to="/weather"
@@ -41,6 +46,7 @@ const Navbar = () => {
               Weather
             </NavLink>
           </li>
+          {/* Store Page */}
           <li>
             <NavLink 
               to="/store"

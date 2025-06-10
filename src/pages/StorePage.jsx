@@ -15,6 +15,7 @@ const StorePage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
 
+  // fetch data
   const getProducts = async () => {
     setIsLoading(true);
     setError("");
@@ -24,6 +25,7 @@ const StorePage = () => {
       setProducts(data);
       setDisplayedProducts(data);
 
+      // fetch categories
       const uniqueCategories = [...new Set(data.map((p) => p.category))];
       setCategories(uniqueCategories);
     } catch (err) {
@@ -70,9 +72,9 @@ const StorePage = () => {
 
   return (
     <div className="p-6">
-      <h1 className="text-3xl font-bold mb-6 text-center">Store</h1>
+      <h1 className="text-3xl font-bold mb-6 text-center">Peyk Store</h1>
 
-      {/* Controls */}
+      {/* Filters */}
       <div className="flex flex-col md:flex-row gap-4 items-center mb-6">
         <input
           type="text"
@@ -102,7 +104,7 @@ const StorePage = () => {
         </select>
       </div>
 
-      {/* Content */}
+      {/* Cards */}
       {isLoading ? (
         <div className="text-center text-gray-500">Loading products...</div>
       ) : error ? (
@@ -121,6 +123,7 @@ const StorePage = () => {
         </>
       )}
 
+    {/* Product Modal */}
     <dialog id="product_modal" className="modal">
         <ProductModal product={selectedProduct}/>
     </dialog>

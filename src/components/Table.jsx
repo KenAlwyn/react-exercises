@@ -5,6 +5,7 @@ const Table = ({ tabData, onEdit, onDelete }) => {
     <div className="p-4">
       <div className="overflow-x-auto rounded-lg shadow">
         <table className="min-w-full bg-white text-sm text-left text-gray-700">
+          {/* Header */}
           <thead className="bg-gray-100 text-gray-700 uppercase text-xs font-semibold">
             <tr>
               <th className="px-4 py-3">#</th>
@@ -18,6 +19,8 @@ const Table = ({ tabData, onEdit, onDelete }) => {
               <th className="px-4 py-3">Options</th>
             </tr>
           </thead>
+
+          {/* Body */}
           <tbody>
             {tabData.length === 0 ? (
               <tr>
@@ -31,14 +34,21 @@ const Table = ({ tabData, onEdit, onDelete }) => {
                   key={idx}
                   className="border-b hover:bg-gray-50 transition-colors"
                 >
+                  {/* User Info */}
                   <td className="px-4 py-2 font-medium">{idx + 1}</td>
                   <td className="px-4 py-2">{userInfo.firstName}</td>
-                  <td className="px-4 py-2">{userInfo.middleName == "" ? "NA" : userInfo.middleName}</td>
+                  <td className="px-4 py-2">
+                    {userInfo.middleName == "" ? "NA" : userInfo.middleName}
+                  </td>
                   <td className="px-4 py-2">{userInfo.lastName}</td>
-                  <td className="px-4 py-2">{userInfo.suffix == "" ? "NA" : userInfo.suffix}</td>
+                  <td className="px-4 py-2">
+                    {userInfo.suffix == "" ? "NA" : userInfo.suffix}
+                  </td>
                   <td className="px-4 py-2">{userInfo.age}</td>
                   <td className="px-4 py-2">{userInfo.birthdate}</td>
                   <td className="px-4 py-2">{userInfo.address}</td>
+
+                  {/* Options */}
                   <td className="py-2">
                     <div className="flex justify-center items-center gap-2">
                       <button
@@ -47,12 +57,12 @@ const Table = ({ tabData, onEdit, onDelete }) => {
                       >
                         Edit
                       </button>
-                <button
-                  className="btn btn-sm bg-red-600 text-white hover:bg-red-700"
-                  onClick={() => onDelete(idx)}
-                >
-                  Delete
-                </button>
+                      <button
+                        className="btn btn-sm bg-red-600 text-white hover:bg-red-700"
+                        onClick={() => onDelete(idx)}
+                      >
+                        Delete
+                      </button>
                     </div>
                   </td>
                 </tr>

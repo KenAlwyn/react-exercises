@@ -9,6 +9,7 @@ const WeatherPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
+  // fetch data
   const getData = async () => {
     if (!query.trim()) {
       setError("Please enter a city name.");
@@ -55,7 +56,6 @@ const WeatherPage = () => {
       </div>
 
       {isLoading && <p className="text-gray-300">Loading...</p>}
-
       {error && <p className="text-red-400">{error}</p>}
 
       {data && !error && (

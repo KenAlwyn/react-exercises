@@ -11,6 +11,7 @@ const UserManagementPage = () => {
   const [hasLoaded, setHasLoaded] = useState(false);
   const [formMode, setFormMode] = useState("add");
 
+  // fetch data
   useEffect(() => {
     const storedUsers = localStorage.getItem(STORAGE_KEY);
     if (storedUsers) {
@@ -19,13 +20,14 @@ const UserManagementPage = () => {
     setHasLoaded(true)
   }, []);
 
+  // update data
   useEffect(() => {
     if(hasLoaded) {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(users));
     }
   }, [users, hasLoaded]);
 
-
+  // operations
   const handleAdd = (newUser) => {
     setUsers([...users, newUser]);
   };
@@ -46,6 +48,7 @@ const UserManagementPage = () => {
     setUsers([]);
   };
 
+  // modals
   const openAddModal = () => {
     setFormMode("add");
     setSelectedUserIndex(null);
@@ -65,6 +68,7 @@ const UserManagementPage = () => {
 
   return (
     <div className="App">
+      {/* Buttons */}
       <div className="flex justify-start ml-3 gap-3">
         <button
           className="btn bg-blue-600 text-white hover:bg-blue-700"
@@ -82,6 +86,7 @@ const UserManagementPage = () => {
 
       <Table tabData={users} onEdit={openEditModal} onDelete={openDeleteModal} />
 
+      {/* Adding/Editing Modal */}
       <dialog id="form_edit_modal" className="modal">
         <UserForm
           key={formMode === "edit" ? selectedUserIndex : "add"}
@@ -91,6 +96,7 @@ const UserManagementPage = () => {
         />
       </dialog>
 
+      {/* Delete Confirmation Modal */}
       <dialog id="form_delete_modal" className="modal">
         <DeleteModal userId={selectedUserIndex} onDelete={handleDelete} />
       </dialog>
