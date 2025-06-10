@@ -31,11 +31,11 @@ function UserForm({ onSubmit, initialData = null, mode = "add" }) {
 
     // name field validation
     const nameFields = ["firstName", "middleName", "lastName", "suffix"];
-    const nameRegex = /^[A-Za-z. ]+$/;
+    const nameRegex = /^[A-Za-z. -]+$/;
 
     for (let field of nameFields) {
       const value = formData[field].trim();
-      if(value == "") continue;
+      if (value == "") continue;
       if (!nameRegex.test(value)) {
         setError(
           `Invalid ${
@@ -49,7 +49,7 @@ function UserForm({ onSubmit, initialData = null, mode = "add" }) {
 
     // address validation
     const addressRegex = /^[A-Za-z0-9. ]+$/;
-    if(!addressRegex.test(formData["address"].trim())) {
+    if (!addressRegex.test(formData["address"].trim())) {
       setError("Invalid Address, only letters and numbers allowed");
       return;
     }
@@ -96,6 +96,9 @@ function UserForm({ onSubmit, initialData = null, mode = "add" }) {
               <label className="text-sm mb-1 text-left">
                 {field.charAt(0).toUpperCase() +
                   field.slice(1).replace(/([A-Z])/g, " $1")}
+                {(field === "firstName" || field === "lastName") && (
+                  <span className="text-red-600">*</span>
+                )}
                 :
               </label>
               <input
@@ -116,6 +119,7 @@ function UserForm({ onSubmit, initialData = null, mode = "add" }) {
             <div className="flex flex-col" key={field}>
               <label className="text-sm mb-1 text-left">
                 {field.charAt(0).toUpperCase() + field.slice(1)}:
+                <span className="text-red-600">*</span>
               </label>
               <input
                 type={field === "birthdate" ? "date" : "number"}
@@ -131,7 +135,7 @@ function UserForm({ onSubmit, initialData = null, mode = "add" }) {
 
         {/* Address */}
         <div className="flex flex-col">
-          <label className="text-sm mb-1 text-left">Address:</label>
+          <label className="text-sm mb-1 text-left">Address<span className="text-red-600">*</span>:</label>
           <input
             type="text"
             name="address"
