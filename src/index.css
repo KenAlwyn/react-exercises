@@ -1,6 +1,10 @@
 @plugin "daisyui";
 @import "tailwindcss";
 
+ @plugin "daisyui" {
+   themes: dark --default;
+ }
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -17,7 +21,6 @@ button {
   border: none;
   outline: none;
   box-shadow: none;
-  cursor: pointer;
 }
 
 
