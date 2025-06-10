@@ -37,7 +37,7 @@ const WeatherPage = () => {
 
   return (
     <div className="p-6 max-w-lg mx-auto text-white">
-      <h1 className="text-2xl font-bold mb-4">Weather Checker</h1>
+      <h1 className="text-2xl font-bold mb-4">Weather Weather Lang</h1>
 
       <div className="flex gap-2 mb-4">
         <input
