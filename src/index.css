@@ -13,5 +13,13 @@
  padding: 2rem;
 }
 
+button {
+  border: none;
+  outline: none;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+
 
 
